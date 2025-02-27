@@ -3,6 +3,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const UserDatabase = require("./src/database/UserDatabase");
 const inscriptionRoute = require("./src/routes/InscriptionRoute");
+const loginRoute = require("./src/routes/loginRoute");
 require("dotenv").config();
 
 const app = express();
@@ -24,6 +25,7 @@ app.get("/", (req, res) => {
 });
 
 app.post("/inscription", inscriptionRoute)
+app.post("/login", loginRoute)
 
 app.use(function (req, res) {
     res.status(404).json({ message: "Aucune page exposée sur cet URL !" });
