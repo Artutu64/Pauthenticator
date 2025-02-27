@@ -42,6 +42,8 @@ async function validate2fa(req, res) {
         let totp = getTOTPfromURI(codeQR)
 
         if(totp.getCode() === code) {
+            let db = new UserDatabase()
+            await db.updateUserQRCode(mail, codeQR)
             res.status(200).json({message: "Succès !"});
         } else {
             res.status(400).json({message: "Erreur, ce n'est pas le bon code !"});
