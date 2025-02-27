@@ -1,1 +1,38 @@
-console.log("Main")
+const express = require("express");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const UserDatabase = require("./src/database/UserDatabase");
+const inscriptionRoute = require("./src/routes/InscriptionRoute");
+require("dotenv").config();
+
+const app = express();
+const port = process.env.PORT || 8080;
+
+const corsOptions = {
+    origin: '*',
+    methods: 'GET, POST, OPTIONS, PUT, DELETE, PATCH',
+    allowedHeaders: 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With, method',
+    maxAge: 3600,
+};
+
+app.use(cors(corsOptions));
+app.use(bodyParser.json());
+
+// Route d'accueil
+app.get("/", (req, res) => {
+  res.json({ message: "Bienvenue sur le backend de Pauthenticator !" });
+});
+
+app.post("/inscription", inscriptionRoute)
+
+app.use(function (req, res) {
+    res.status(404).json({ message: "Aucune page exposée sur cet URL !" });
+});
+  
+
+new UserDatabase();
+
+// Lancer le serveur
+app.listen(port, () => {
+  console.log(`Serveur démarré sur http://localhost:${port}`);
+});
