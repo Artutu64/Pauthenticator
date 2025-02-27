@@ -9,7 +9,7 @@ class TokenFactory {
     isValid(token){
         try {
             let data = extractTokenData(token)
-            if(data.timestamp <= Date.now()){
+            if(data.timestamp > Date.now()){
                 return true
             } else {
                 return false

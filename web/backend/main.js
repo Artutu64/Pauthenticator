@@ -4,6 +4,8 @@ const bodyParser = require("body-parser");
 const UserDatabase = require("./src/database/UserDatabase");
 const inscriptionRoute = require("./src/routes/InscriptionRoute");
 const loginRoute = require("./src/routes/loginRoute");
+const dashboardRoute = require("./src/routes/DashboardRoute");
+const TOTPDatabase = require("./src/database/TOTPDatabase");
 require("dotenv").config();
 
 const app = express();
@@ -26,6 +28,7 @@ app.get("/", (req, res) => {
 
 app.post("/inscription", inscriptionRoute)
 app.post("/login", loginRoute)
+app.get("/dashboard", dashboardRoute)
 
 app.use(function (req, res) {
     res.status(404).json({ message: "Aucune page exposée sur cet URL !" });
@@ -33,6 +36,7 @@ app.use(function (req, res) {
   
 
 new UserDatabase();
+new TOTPDatabase()
 
 // Lancer le serveur
 app.listen(port, () => {
