@@ -1,10 +1,11 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Page from "./Page";
 import { QRCodeCanvas } from "qrcode.react";
 
 const Page2FA = () => {
-  const [code, setCode] = useState(new Array(8).fill(""));
-  const inputsRef = useRef([]);
+  const [code, setCode] = useState(new Array(8).fill("")); // Tableau pour stocker le code
+  const [message, setMessage] = useState(null); // Message de succès ou d'erreur
+  const inputsRef = useRef([]); // Références des inputs
 
   // Gérer la saisie du code
   const handleChange = (index, event) => {
@@ -28,6 +29,26 @@ const Page2FA = () => {
     }
   };
 
+  // Vérifier automatiquement si tous les inputs sont remplis
+  useEffect(() => {
+    if (code.every((char) => char !== "")) {
+      // Une chance sur deux de succès ou d'erreur
+      const success = Math.random() < 0.5;
+
+      if (success) {
+        setMessage({ text: "✅ Succès ! Code valide.", color: "green" });
+      } else {
+        setMessage({ text: "❌ Erreur ! Code incorrect.", color: "red" });
+      }
+
+      // Effacer immédiatement les inputs après validation
+      setTimeout(() => {
+        setCode(new Array(8).fill("")); // Réinitialiser les inputs
+        inputsRef.current[0]?.focus(); // Remettre le focus sur le premier champ
+      }, 50);
+    }
+  }, [code]);
+
   return (
     <Page>
       <div className="page2fa-container">
@@ -35,7 +56,7 @@ const Page2FA = () => {
 
         {/* QR Code */}
         <div className="qr-container">
-        <QRCodeCanvas value="otpauth://totp/YourApp?secret=YOUR_SECRET_KEY" size={150} />
+          <QRCodeCanvas value="otpauth://totp/YourApp?secret=YOUR_SECRET_KEY" size={150} />
         </div>
 
         <p>Entrez votre code de validation reçu par email :</p>
@@ -56,7 +77,8 @@ const Page2FA = () => {
           ))}
         </div>
 
-        <button type="submit">Valider</button>
+        {/* Affichage du message de validation */}
+        {message && <p className="message-validation" style={{ color: message.color }}>{message.text}</p>}
       </div>
     </Page>
   );

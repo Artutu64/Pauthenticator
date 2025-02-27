@@ -1,15 +1,27 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../logo.svg";
 import "../App.css"; // Import du CSS
 
 const Page = ({ children }) => {
+  const navigate = useNavigate(); // Hook pour la navigation
+
+  // Fonction pour revenir au Dashboard
+  const goToDashboard = () => {
+    navigate("/");
+  };
+
   return (
     <div className="App">
       {/* Bandeau supérieur */}
       <header className="App-header">
         <div className="App-header-left">
-          <img src={logo} alt="Logo" className="App-logo" />
+          <img 
+            src={logo} 
+            alt="Logo" 
+            className="App-logo clickable-logo" 
+            onClick={goToDashboard} 
+          />
           <h1 className="App-title">Pauthenticator</h1>
         </div>
 
@@ -35,7 +47,7 @@ const Page = ({ children }) => {
 
       {/* Bandeau inférieur */}
       <footer className="App-footer">
-        <div className="footer-center">© 2025 Rimaudière Brenot Deprêter</div>
+        <div className="footer-center">© 2025 RIMAUDIERE BRENOT DEPRETER</div>
         <div className="footer-right">Tous droits réservés</div>
       </footer>
     </div>
@@ -43,4 +55,3 @@ const Page = ({ children }) => {
 };
 
 export default Page;
-
