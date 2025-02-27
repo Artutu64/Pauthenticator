@@ -1,38 +1,570 @@
+/* ========== GLOBAL ========== */
 .App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Assure que la page prend toute la hauteur */
+}
+
+/* ========== HEADER ========== */
+.App-header {
+  background-color: #1e3a8a; /* Bleu foncé */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  position: relative; /* Permet de centrer la navigation */
+}
+
+/* Conteneur du logo et du titre */
+.App-header-left {
+  display: flex;
+  align-items: center;
+}
+
+/* Logo */
+.App-logo {
+  height: 60px;
+  width: 60px;
+  margin-right: 10px;
+}
+
+/* Logo cliquable avec effet hover */
+.clickable-logo {
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.clickable-logo:hover {
+  transform: scale(1.1); /* Légère augmentation de taille au survol */
+}
+
+/* Titre */
+.App-title {
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* Navigation centrée */
+.App-nav {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 15px;
+}
+
+/* Boutons de navigation */
+.App-button {
+  background-color: white;
+  color: #1e3a8a;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.App-button:hover {
+  background-color: #e0e7ff;
+  transform: scale(1.05);
+}
+
+/* ========== CONTENU PRINCIPAL ========== */
+.App-main {
+  flex: 1; /* Permet au contenu de prendre tout l'espace restant */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f3f4f6;
+}
+
+/* ========== FOOTER ========== */
+.App-footer {
+  background-color: #1f2937;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 30px;
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Partie centrale du footer */
+.footer-center {
+  flex: 1;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Partie droite du footer */
+.footer-right {
+  text-align: right;
+  padding-right: 10px;
+  white-space: nowrap;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* ========== FORMULAIRES (Connexion, Inscription, 2FA) ========== */
+.form-container,
+.dashboard-container {
+  text-align: center;
+  max-width: 400px;
+  margin: 0 auto;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Titres des pages */
+.dashboard-container h2,
+.form-container h2,
+.page2fa-container h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #1e3a8a;
+}
+
+/* ========== FORMULAIRES GÉNÉRAUX (Connexion, Inscription, 2FA) ========== */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  margin-top: 15px;
+  max-width: 500px;
+  width: 100%;
+}
+
+/* Champs de saisie */
+.form input {
+  padding: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 18px;
+}
+
+/* Effet focus */
+.form input:focus {
+  border-color: #1e3a8a;
+  outline: none;
+  box-shadow: 0px 0px 6px rgba(30, 58, 138, 0.5);
+}
+
+/* Bouton */
+.form button {
+  background-color: #1e3a8a;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 14px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.form button:hover {
+  background-color: #14286c;
+  transform: scale(1.05);
+}
+
+/* ========== PAGE INSCRIPTION ========== */
+.inscription-container {
+  text-align: center;
+  max-width: 500px;
+  margin: 0 auto;
+  padding-top: 20px;
+}
+
+/* Formulaire d'inscription */
+.inscription-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  margin-top: 15px;
+  max-width: 500px;
+  width: 100%;
+}
+
+/* Titres et texte */
+.inscription-container h2,
+.connexion-container h2 {
+  font-size: 26px;
+  font-weight: bold;
+  color: #1e3a8a;
+  text-align: center;
+}
+
+.inscription-container p,
+.connexion-container p {
+  font-size: 18px;
+  color: #555;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Champs du formulaire */
+.inscription-form label {
+  font-weight: bold;
+  color: #333;
+  text-align: left;
+  margin-bottom: 5px;
+  font-size: 16px;
+}
+
+/* Champs plus grands */
+.inscription-form input {
+  padding: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 18px;
+}
+
+/* Effet focus */
+.inscription-form input:focus {
+  border-color: #1e3a8a;
+  outline: none;
+  box-shadow: 0px 0px 6px rgba(30, 58, 138, 0.5);
+}
+
+/* Bouton */
+.inscription-form button {
+  background-color: #1e3a8a;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 14px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.inscription-form button:hover {
+  background-color: #14286c;
+  transform: scale(1.05);
+}
+
+/* ========== PAGE INSCRIPTION & CONNEXION ========== */
+.inscription-container,
+.connexion-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centre verticalement */
+  align-items: center; /* Centre horizontalement */
+  text-align: center; /* Assure que le texte est centré */
+  width: 100%;
+  max-width: 400px; /* Largeur uniforme du formulaire et du titre */
+  margin: 0 auto; /* Centre le tout */
+  padding-top: 20px;
+}
+
+/* Titres et texte bien centrés */
+.inscription-container h2,
+.connexion-container h2 {
+  font-size: 26px;
+  font-weight: bold;
+  color: #1e3a8a;
+  width: 100%;
+  text-align: center;
+}
+
+.inscription-container p,
+.connexion-container p {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 20px;
+  text-align: center;
+}
+/* Texte sous le titre en une seule ligne */
+.connexion-container p {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 20px;
+  text-align: center;
+  max-width: 100%; /* Assure qu'il ne dépasse pas du conteneur */
+}
+
+
+/* Formulaires parfaitement alignés */
+.inscription-form,
+.connexion-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centre tout le contenu du formulaire */
+  justify-content: center;
+  gap: 15px;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px; /* Même largeur que le conteneur */
+  margin-right: 0px; /* Centre le formulaire */
+}
+
+/* Labels alignés correctement */
+.inscription-form label,
+.connexion-form label {
+  width: 100%;
+  text-align: left; /* Les labels restent alignés à gauche */
+  font-weight: bold;
+  color: #333;
+}
+
+/* Champs de saisie bien centrés */
+.inscription-form input,
+.connexion-form input {
+  width: 100%; /* Largeur uniforme */
+  padding: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 18px;
+  text-align: left; /* Texte aligné à gauche */
+}
+
+/* Effet focus */
+.inscription-form input:focus,
+.connexion-form input:focus {
+  border-color: #1e3a8a;
+  outline: none;
+  box-shadow: 0px 0px 6px rgba(30, 58, 138, 0.5);
+}
+
+/* Boutons bien centrés */
+.inscription-form button,
+.connexion-form button {
+  background-color: #1e3a8a;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 14px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 100%;
+}
+
+.inscription-form button:hover,
+.connexion-form button:hover {
+  background-color: #14286c;
+  transform: scale(1.05);
+}
+
+
+
+/* ========== PAGE 2FA ========== */
+.page2fa-container {
+  text-align: center;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* QR Code */
+.qr-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+/* Code validation (inputs alignés) */
+.code-inputs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px; /* Réduit l’espace sous les inputs */
+}
+
+/* Input pour chaque chiffre */
+.digit-input {
+  width: 40px;
+  height: 50px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  border: 2px solid #1e3a8a;
+  border-radius: 6px;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.digit-input:focus {
+  border-color: #14286c;
+  box-shadow: 0px 0px 6px rgba(30, 58, 138, 0.5);
+}
+
+/* ========== DASHBOARD ========== */
+.dashboard-container {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 80vh;
+  justify-content: flex-start;
+}
+
+/* Informations du profil */
+.profile-info {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: left;
+  font-size: 20px;
+  line-height: 1.6;
+  width: 100%;
+}
+
+/* Bouton gestion 2FA */
+.toggle-2fa-button {
+  background-color: #1e3a8a;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 14px;
+  margin-top: 20px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.toggle-2fa-button:hover {
+  background-color: #14286c;
+  transform: scale(1.05);
+}
+
+/* Message de validation */
+.message-validation {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* ========== PAGE CONNEXION UNIQUEMENT ========== */
+.connexion-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Monte les éléments vers le haut */
+  align-items: center; /* Centre horizontalement */
+  text-align: center;
+  width: 100%;
+  max-width: 400px; /* Largeur uniforme */
+  margin: 0 auto;
+  padding-top: 0px; /* Élimine l’espace en haut */
+  position: relative; /* Assure un bon positionnement */
+  top: -50px; /* Remonte tout l’ensemble */
+}
+
+/* Titre bien centré et remonté */
+.connexion-container h2 {
+  font-size: 26px;
+  font-weight: bold;
+  color: #1e3a8a;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Texte sous le titre bien centré et rapproché */
+.connexion-container p {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 15px; /* Réduit l’espace sous la phrase */
+  text-align: center;
+  max-width: 100%;
+}
+
+/* Formulaire bien centré et remonté */
+.connexion-form {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 15px;
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px;
+}
+/* ========== PAGE VALIDATION 2FA ========== */
+.page2fa-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Monte les éléments vers le haut */
+  align-items: center; /* Centre horizontalement */
+  text-align: center;
+  width: 100%;
+  max-width: 400px; /* Largeur uniforme */
+  margin: 0 auto;
+  padding-top: 0px; /* Élimine l’espace en haut */
+  position: relative; /* Permet d’ajuster avec top */
+  top: -50px; /* Remonte la page */
 }
 
-.App-link {
-  color: #61dafb;
+/* Titre bien centré et rapproché du haut */
+.page2fa-container h2 {
+  font-size: 26px;
+  font-weight: bold;
+  color: #1e3a8a;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Texte sous le titre bien centré */
+.page2fa-container p {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 15px;
+  text-align: center;
+  max-width: 100%;
+}
+
+/* Inputs de validation 2FA bien alignés */
+.code-inputs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+/* Champs de saisie */
+.digit-input {
+  width: 40px;
+  height: 50px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  border: 2px solid #1e3a8a;
+  border-radius: 6px;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.digit-input:focus {
+  border-color: #14286c;
+  box-shadow: 0px 0px 6px rgba(30, 58, 138, 0.5);
+}
+
+/* Message de validation */
+.message-validation {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
 }
