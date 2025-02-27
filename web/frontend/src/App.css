@@ -1,38 +1,336 @@
+/* ========== HEADER ========== */
 .App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Assure que la page prend toute la hauteur */
+}
+.App-header {
+  background-color: #1e3a8a; /* Bleu foncé */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  position: relative; /* Permet de centrer la navigation */
+}
+
+/* Conteneur du logo et du titre */
+.App-header-left {
+  display: flex;
+  align-items: center;
+}
+
+/* Logo */
+.App-logo {
+  height: 60px;
+  width: 60px;
+  margin-right: 10px;
+}
+
+/* Titre */
+.App-title {
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* Navigation centrée */
+.App-nav {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 15px;
+}
+
+/* Boutons de navigation */
+.App-button {
+  background-color: white;
+  color: #1e3a8a;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.App-button:hover {
+  background-color: #e0e7ff;
+  transform: scale(1.05);
+}
+
+/* ========== CONTENU PRINCIPAL ========== */
+.App-main {
+  flex: 1; /* Permet au contenu de prendre tout l'espace restant */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f3f4f6;
+}
+
+/* ========== FOOTER ========== */
+.App-footer {
+  background-color: #1f2937;
+  color: white;
+  display: flex;
+  justify-content: space-between; /* Garde les éléments bien espacés */
+  align-items: center;
+  padding: 10px 30px; /* Augmente le padding latéral pour éviter que le texte soit coupé */
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box; /* Empêche le débordement */
+}
+
+/* Partie centrale du footer (pour les noms) */
+.footer-center {
+  flex: 1; /* Permet de centrer le texte */
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Partie droite du footer (Copyright) */
+.footer-right {
+  text-align: right;
+  padding-right: 10px; /* Ajoute un peu d'espace pour éviter qu'il touche le bord */
+  white-space: nowrap; /* Empêche le retour à la ligne */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* ========== FORMULAIRES (Connexion, Inscription, 2FA) ========== */
+.form-container,
+.dashboard-container {
+  text-align: center; /* Centre le texte */
+  max-width: 400px;
+  margin: 0 auto; /* Centre horizontalement */
+}
+/* Titre des pages Dashboard, Connexion et 2FA */
+.dashboard-container h2,
+.form-container h2,
+.page2fa-container h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #1e3a8a; /* Remettre la couleur bleue */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* ========== FORMULAIRES GÉNÉRAUX (Connexion, Inscription, 2FA) ========== */
+.form {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  gap: 15px; /* Augmente l'espacement entre les champs */
+  background: white;
+  padding: 25px; /* Augmente l'espace intérieur */
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  margin-top: 15px;
+  max-width: 500px; /* Augmente la largeur du formulaire */
+  width: 100%; /* Permet l'adaptation responsive */
+}
+
+/* Champs de saisie plus grands */
+.form input {
+  padding: 14px; /* Augmente la hauteur des champs */
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 18px; /* Augmente la taille du texte */
+}
+
+/* Effet focus */
+.form input:focus {
+  border-color: #1e3a8a;
+  outline: none;
+  box-shadow: 0px 0px 6px rgba(30, 58, 138, 0.5);
+}
+
+/* Bouton plus grand */
+.form button {
+  background-color: #1e3a8a;
   color: white;
+  font-size: 18px; /* Augmente la taille du texte */
+  font-weight: bold;
+  padding: 14px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.App-link {
-  color: #61dafb;
+.form button:hover {
+  background-color: #14286c;
+  transform: scale(1.05);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Champs des formulaires */
+.form label {
+  font-weight: bold;
+  color: #333;
+}
+
+.form input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.form input:focus {
+  border-color: #1e3a8a;
+  outline: none;
+  box-shadow: 0px 0px 5px rgba(30, 58, 138, 0.5);
+}
+
+/* Bouton générique des formulaires */
+.form button {
+  background-color: #1e3a8a;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.form button:hover {
+  background-color: #14286c;
+  transform: scale(1.05);
+}
+
+/* ========== FORMULAIRE INSCRIPTION AGRANDI ========== */
+.inscription-container {
+  text-align: center;
+  max-width: 500px; /* Augmente la largeur du formulaire */
+  margin: 0 auto;
+  padding-top: 20px;
+}
+
+/* Formulaire d'inscription */
+.inscription-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Augmente l'espacement entre les champs */
+  background: white;
+  padding: 30px; /* Augmente l'espace intérieur */
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  margin-top: 15px;
+  max-width: 500px; /* Agrandir le formulaire */
+  width: 100%;
+}
+
+/* Titre et texte */
+.inscription-container h2 {
+  font-size: 26px; /* Augmente la taille du titre */
+  font-weight: bold;
+  color: #1e3a8a;
+}
+
+.inscription-container p {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 20px; /* Plus d’espace sous le texte */
+}
+
+/* Champs du formulaire */
+.inscription-form label {
+  font-weight: bold;
+  color: #333;
+  text-align: left;
+  margin-bottom: 5px; /* Ajoute un espace entre le label et l'input */
+  font-size: 16px;
+}
+
+/* Champs plus grands */
+.inscription-form input {
+  padding: 14px; /* Augmente la hauteur */
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 18px;
+}
+
+/* Effet focus */
+.inscription-form input:focus {
+  border-color: #1e3a8a;
+  outline: none;
+  box-shadow: 0px 0px 6px rgba(30, 58, 138, 0.5);
+}
+
+/* Bouton plus grand */
+.inscription-form button {
+  background-color: #1e3a8a;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 14px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.inscription-form button:hover {
+  background-color: #14286c;
+  transform: scale(1.05);
+}
+
+
+
+/* ========== PAGE 2FA ========== */
+/* ========== CONTAINER 2FA ========== */
+.page2fa-container {
+  text-align: center;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* QR Code */
+.qr-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+/* Champs de validation en ligne */
+.code-inputs {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Espacement entre les champs */
+  margin: 10px 0;
+}
+
+/* Input pour chaque chiffre */
+.digit-input {
+  width: 40px;
+  height: 50px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  border: 2px solid #1e3a8a;
+  border-radius: 6px;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.digit-input:focus {
+  border-color: #14286c;
+  box-shadow: 0px 0px 6px rgba(30, 58, 138, 0.5);
+}
+
+/* Bouton */
+.page2fa-container button {
+  background-color: #1e3a8a;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 15px;
+}
+
+.page2fa-container button:hover {
+  background-color: #14286c;
+  transform: scale(1.05);
 }
