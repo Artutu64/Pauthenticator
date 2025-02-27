@@ -6,6 +6,7 @@ const inscriptionRoute = require("./src/routes/InscriptionRoute");
 const loginRoute = require("./src/routes/loginRoute");
 const dashboardRoute = require("./src/routes/DashboardRoute");
 const TOTPDatabase = require("./src/database/TOTPDatabase");
+const reset2faRoute = require("./src/routes/reset2fa");
 require("dotenv").config();
 
 const app = express();
@@ -29,6 +30,7 @@ app.get("/", (req, res) => {
 app.post("/inscription", inscriptionRoute)
 app.post("/login", loginRoute)
 app.get("/dashboard", dashboardRoute)
+app.post("/reset2fa", reset2faRoute)
 
 app.use(function (req, res) {
     res.status(404).json({ message: "Aucune page exposée sur cet URL !" });

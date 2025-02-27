@@ -27,7 +27,7 @@ class TOTPDatabase {
     async insertTOTP(mail, totp) {
         return new Promise((resolve, reject) => {
             const stmt = this.db.prepare("INSERT INTO totp (mail, totp) VALUES (?, ?)");
-            stmt.run(mail, totp, "", function(err) {
+            stmt.run(mail, totp, function(err) {
                 if (err) {
                     reject(err);
                 } else {
