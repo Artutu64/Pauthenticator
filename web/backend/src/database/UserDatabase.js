@@ -59,6 +59,24 @@ class UserDatabase {
         });        
     }
 
+    updateUserQRCode(mail, qrcode) {
+        return new Promise((resolve, reject) => {
+
+            const stmt = this.db.prepare("UPDATE users SET mail=?, qrcode=? WHERE mail=?;");
+        
+            stmt.run(mail, qrcode, mail, function(err) {
+                if (err) {
+                    reject(err);
+                } else {
+                    // Renvoie le nombre de lignes modifiées
+                    resolve({ changes: this.changes });
+                }
+            });
+        
+            stmt.finalize();
+        });        
+    }
+
     getUsers() {
         return new Promise((resolve, reject) => {
             this.db.all("SELECT * FROM users", [], (err, rows) => {
