@@ -47,7 +47,7 @@ class TOTP {
 
 function createTOTP(mail){
     let secretKey = new SecretKey(32)
-    return new TOTP(5, 8, secretKey.toString(), "SHA512", mail)
+    return new TOTP(30, 8, secretKey.toString(), "SHA512", mail)
 }
 
 function parseTotpUri(uri) {
