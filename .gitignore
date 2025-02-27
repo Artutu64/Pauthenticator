@@ -25,5 +25,8 @@ web/frontend/yarn-error.log*
 # =========================================================
 
 app/node_modules/
-app/android/
+app/android/app/build/
+app/android/app/.cxx/
+app/android/build/
+app/android/.gradle/
 app/ios/
