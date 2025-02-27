@@ -1,9 +1,11 @@
-/* ========== HEADER ========== */
+/* ========== GLOBAL ========== */
 .App {
   display: flex;
   flex-direction: column;
   min-height: 100vh; /* Assure que la page prend toute la hauteur */
 }
+
+/* ========== HEADER ========== */
 .App-header {
   background-color: #1e3a8a; /* Bleu foncé */
   display: flex;
@@ -24,6 +26,16 @@
   height: 60px;
   width: 60px;
   margin-right: 10px;
+}
+
+/* Logo cliquable avec effet hover */
+.clickable-logo {
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.clickable-logo:hover {
+  transform: scale(1.1); /* Légère augmentation de taille au survol */
 }
 
 /* Titre */
@@ -75,63 +87,64 @@
   background-color: #1f2937;
   color: white;
   display: flex;
-  justify-content: space-between; /* Garde les éléments bien espacés */
+  justify-content: space-between;
   align-items: center;
-  padding: 10px 30px; /* Augmente le padding latéral pour éviter que le texte soit coupé */
+  padding: 10px 30px;
   font-size: 14px;
   width: 100%;
-  box-sizing: border-box; /* Empêche le débordement */
+  box-sizing: border-box;
 }
 
-/* Partie centrale du footer (pour les noms) */
+/* Partie centrale du footer */
 .footer-center {
-  flex: 1; /* Permet de centrer le texte */
+  flex: 1;
   text-align: center;
 }
 
-/* Partie droite du footer (Copyright) */
+/* Partie droite du footer */
 .footer-right {
   text-align: right;
-  padding-right: 10px; /* Ajoute un peu d'espace pour éviter qu'il touche le bord */
-  white-space: nowrap; /* Empêche le retour à la ligne */
+  padding-right: 10px;
+  white-space: nowrap;
 }
 
 /* ========== FORMULAIRES (Connexion, Inscription, 2FA) ========== */
 .form-container,
 .dashboard-container {
-  text-align: center; /* Centre le texte */
+  text-align: center;
   max-width: 400px;
-  margin: 0 auto; /* Centre horizontalement */
+  margin: 0 auto;
 }
-/* Titre des pages Dashboard, Connexion et 2FA */
+
+/* Titres des pages */
 .dashboard-container h2,
 .form-container h2,
 .page2fa-container h2 {
   font-size: 24px;
   font-weight: bold;
-  color: #1e3a8a; /* Remettre la couleur bleue */
+  color: #1e3a8a;
 }
 
 /* ========== FORMULAIRES GÉNÉRAUX (Connexion, Inscription, 2FA) ========== */
 .form {
   display: flex;
   flex-direction: column;
-  gap: 15px; /* Augmente l'espacement entre les champs */
+  gap: 15px;
   background: white;
-  padding: 25px; /* Augmente l'espace intérieur */
+  padding: 25px;
   border-radius: 12px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   margin-top: 15px;
-  max-width: 500px; /* Augmente la largeur du formulaire */
-  width: 100%; /* Permet l'adaptation responsive */
+  max-width: 500px;
+  width: 100%;
 }
 
-/* Champs de saisie plus grands */
+/* Champs de saisie */
 .form input {
-  padding: 14px; /* Augmente la hauteur des champs */
+  padding: 14px;
   border: 1px solid #ccc;
   border-radius: 6px;
-  font-size: 18px; /* Augmente la taille du texte */
+  font-size: 18px;
 }
 
 /* Effet focus */
@@ -141,11 +154,11 @@
   box-shadow: 0px 0px 6px rgba(30, 58, 138, 0.5);
 }
 
-/* Bouton plus grand */
+/* Bouton */
 .form button {
   background-color: #1e3a8a;
   color: white;
-  font-size: 18px; /* Augmente la taille du texte */
+  font-size: 18px;
   font-weight: bold;
   padding: 14px;
   border-radius: 10px;
@@ -159,47 +172,10 @@
   transform: scale(1.05);
 }
 
-/* Champs des formulaires */
-.form label {
-  font-weight: bold;
-  color: #333;
-}
-
-.form input {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
-}
-
-.form input:focus {
-  border-color: #1e3a8a;
-  outline: none;
-  box-shadow: 0px 0px 5px rgba(30, 58, 138, 0.5);
-}
-
-/* Bouton générique des formulaires */
-.form button {
-  background-color: #1e3a8a;
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-  padding: 12px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.form button:hover {
-  background-color: #14286c;
-  transform: scale(1.05);
-}
-
-/* ========== FORMULAIRE INSCRIPTION AGRANDI ========== */
+/* ========== PAGE INSCRIPTION ========== */
 .inscription-container {
   text-align: center;
-  max-width: 500px; /* Augmente la largeur du formulaire */
+  max-width: 500px;
   margin: 0 auto;
   padding-top: 20px;
 }
@@ -208,27 +184,31 @@
 .inscription-form {
   display: flex;
   flex-direction: column;
-  gap: 15px; /* Augmente l'espacement entre les champs */
+  gap: 15px;
   background: white;
-  padding: 30px; /* Augmente l'espace intérieur */
+  padding: 30px;
   border-radius: 12px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   margin-top: 15px;
-  max-width: 500px; /* Agrandir le formulaire */
+  max-width: 500px;
   width: 100%;
 }
 
-/* Titre et texte */
-.inscription-container h2 {
-  font-size: 26px; /* Augmente la taille du titre */
+/* Titres et texte */
+.inscription-container h2,
+.connexion-container h2 {
+  font-size: 26px;
   font-weight: bold;
   color: #1e3a8a;
+  text-align: center;
 }
 
-.inscription-container p {
+.inscription-container p,
+.connexion-container p {
   font-size: 18px;
   color: #555;
-  margin-bottom: 20px; /* Plus d’espace sous le texte */
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 /* Champs du formulaire */
@@ -236,13 +216,13 @@
   font-weight: bold;
   color: #333;
   text-align: left;
-  margin-bottom: 5px; /* Ajoute un espace entre le label et l'input */
+  margin-bottom: 5px;
   font-size: 16px;
 }
 
 /* Champs plus grands */
 .inscription-form input {
-  padding: 14px; /* Augmente la hauteur */
+  padding: 14px;
   border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 18px;
@@ -255,7 +235,7 @@
   box-shadow: 0px 0px 6px rgba(30, 58, 138, 0.5);
 }
 
-/* Bouton plus grand */
+/* Bouton */
 .inscription-form button {
   background-color: #1e3a8a;
   color: white;
@@ -273,10 +253,116 @@
   transform: scale(1.05);
 }
 
+/* ========== PAGE INSCRIPTION & CONNEXION ========== */
+.inscription-container,
+.connexion-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centre verticalement */
+  align-items: center; /* Centre horizontalement */
+  text-align: center; /* Assure que le texte est centré */
+  width: 100%;
+  max-width: 400px; /* Largeur uniforme du formulaire et du titre */
+  margin: 0 auto; /* Centre le tout */
+  padding-top: 20px;
+}
+
+/* Titres et texte bien centrés */
+.inscription-container h2,
+.connexion-container h2 {
+  font-size: 26px;
+  font-weight: bold;
+  color: #1e3a8a;
+  width: 100%;
+  text-align: center;
+}
+
+.inscription-container p,
+.connexion-container p {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 20px;
+  text-align: center;
+}
+/* Texte sous le titre en une seule ligne */
+.connexion-container p {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 20px;
+  text-align: center;
+  max-width: 100%; /* Assure qu'il ne dépasse pas du conteneur */
+}
+
+
+/* Formulaires parfaitement alignés */
+.inscription-form,
+.connexion-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centre tout le contenu du formulaire */
+  justify-content: center;
+  gap: 15px;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px; /* Même largeur que le conteneur */
+  margin-right: 0px; /* Centre le formulaire */
+}
+
+/* Labels alignés correctement */
+.inscription-form label,
+.connexion-form label {
+  width: 100%;
+  text-align: left; /* Les labels restent alignés à gauche */
+  font-weight: bold;
+  color: #333;
+}
+
+/* Champs de saisie bien centrés */
+.inscription-form input,
+.connexion-form input {
+  width: 100%; /* Largeur uniforme */
+  padding: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 18px;
+  text-align: left; /* Texte aligné à gauche */
+}
+
+/* Effet focus */
+.inscription-form input:focus,
+.connexion-form input:focus {
+  border-color: #1e3a8a;
+  outline: none;
+  box-shadow: 0px 0px 6px rgba(30, 58, 138, 0.5);
+}
+
+/* Boutons bien centrés */
+.inscription-form button,
+.connexion-form button {
+  background-color: #1e3a8a;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 14px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 100%;
+}
+
+.inscription-form button:hover,
+.connexion-form button:hover {
+  background-color: #14286c;
+  transform: scale(1.05);
+}
+
 
 
 /* ========== PAGE 2FA ========== */
-/* ========== CONTAINER 2FA ========== */
 .page2fa-container {
   text-align: center;
   max-width: 400px;
@@ -290,12 +376,12 @@
   margin-bottom: 20px;
 }
 
-/* Champs de validation en ligne */
+/* Code validation (inputs alignés) */
 .code-inputs {
   display: flex;
   justify-content: center;
-  gap: 10px; /* Espacement entre les champs */
-  margin: 10px 0;
+  gap: 10px;
+  margin-bottom: 10px; /* Réduit l’espace sous les inputs */
 }
 
 /* Input pour chaque chiffre */
@@ -316,44 +402,17 @@
   box-shadow: 0px 0px 6px rgba(30, 58, 138, 0.5);
 }
 
-/* Bouton */
-.page2fa-container button {
-  background-color: #1e3a8a;
-  color: white;
-  font-size: 18px;
-  font-weight: bold;
-  padding: 12px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  margin-top: 15px;
-}
-
-.page2fa-container button:hover {
-  background-color: #14286c;
-  transform: scale(1.05);
-}
-
 /* ========== DASHBOARD ========== */
 .dashboard-container {
   text-align: center;
   max-width: 600px;
   margin: 0 auto;
-  padding-top: 10px; /* Réduit l'espace en haut */
+  padding-top: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 80vh; /* Assure une bonne hauteur */
-  justify-content: flex-start; /* Monte les éléments vers le haut */
-}
-
-/* Titre plus grand et plus proche du haut */
-.dashboard-container h2 {
-  font-size: 32px;
-  font-weight: bold;
-  color: #1e3a8a;
-  margin-bottom: 15px; /* Réduit l'espace sous le titre */
+  min-height: 80vh;
+  justify-content: flex-start;
 }
 
 /* Informations du profil */
@@ -368,24 +427,7 @@
   width: 100%;
 }
 
-
-/* Espacement des paragraphes */
-.profile-info p {
-  margin: 15px 0;
-}
-
-/* Statut de la 2FA */
-.status-enabled {
-  color: green;
-  font-weight: bold;
-}
-
-.status-disabled {
-  color: red;
-  font-weight: bold;
-}
-
-/* Bouton de gestion de la 2FA */
+/* Bouton gestion 2FA */
 .toggle-2fa-button {
   background-color: #1e3a8a;
   color: white;
@@ -403,4 +445,126 @@
 .toggle-2fa-button:hover {
   background-color: #14286c;
   transform: scale(1.05);
+}
+
+/* Message de validation */
+.message-validation {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* ========== PAGE CONNEXION UNIQUEMENT ========== */
+.connexion-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Monte les éléments vers le haut */
+  align-items: center; /* Centre horizontalement */
+  text-align: center;
+  width: 100%;
+  max-width: 400px; /* Largeur uniforme */
+  margin: 0 auto;
+  padding-top: 0px; /* Élimine l’espace en haut */
+  position: relative; /* Assure un bon positionnement */
+  top: -50px; /* Remonte tout l’ensemble */
+}
+
+/* Titre bien centré et remonté */
+.connexion-container h2 {
+  font-size: 26px;
+  font-weight: bold;
+  color: #1e3a8a;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Texte sous le titre bien centré et rapproché */
+.connexion-container p {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 15px; /* Réduit l’espace sous la phrase */
+  text-align: center;
+  max-width: 100%;
+}
+
+/* Formulaire bien centré et remonté */
+.connexion-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px;
+}
+/* ========== PAGE VALIDATION 2FA ========== */
+.page2fa-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Monte les éléments vers le haut */
+  align-items: center; /* Centre horizontalement */
+  text-align: center;
+  width: 100%;
+  max-width: 400px; /* Largeur uniforme */
+  margin: 0 auto;
+  padding-top: 0px; /* Élimine l’espace en haut */
+  position: relative; /* Permet d’ajuster avec top */
+  top: -50px; /* Remonte la page */
+}
+
+/* Titre bien centré et rapproché du haut */
+.page2fa-container h2 {
+  font-size: 26px;
+  font-weight: bold;
+  color: #1e3a8a;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Texte sous le titre bien centré */
+.page2fa-container p {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 15px;
+  text-align: center;
+  max-width: 100%;
+}
+
+/* Inputs de validation 2FA bien alignés */
+.code-inputs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+/* Champs de saisie */
+.digit-input {
+  width: 40px;
+  height: 50px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  border: 2px solid #1e3a8a;
+  border-radius: 6px;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.digit-input:focus {
+  border-color: #14286c;
+  box-shadow: 0px 0px 6px rgba(30, 58, 138, 0.5);
+}
+
+/* Message de validation */
+.message-validation {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
 }
