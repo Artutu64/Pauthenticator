@@ -94,7 +94,6 @@ function parseTotpUri(uri) {
 function getTOTPfromURI(uri){
     try {
         uri = parseTotpUri(uri)
-        console.log(uri)
         return new TOTP(uri.period, uri.digits, uri.secret, uri.algorithm, uri.email)
     } catch(error){
         throw error
