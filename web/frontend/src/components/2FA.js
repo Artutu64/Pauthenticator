@@ -101,6 +101,14 @@ const Page2FA = () => {
     }, 2000);
   };
 
+  if(!isLoggedIn){
+    return (
+      <>
+        <Navigate to="/connexion" replace={true} />
+      </>
+    )
+  }
+
   if (loading) {
     return (
       <Page>
@@ -113,7 +121,6 @@ const Page2FA = () => {
 
   return (
     <>
-      {!isLoggedIn && <Navigate to="/connexion" replace={true} />}
       <Page>
         <div className="page2fa-container">
           <h2>Authentification à Deux Facteurs</h2>
