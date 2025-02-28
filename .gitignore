@@ -2,7 +2,8 @@ web/backend/node_modules/
 web/frontend/node_modules/
 web/frontend/.pnp
 web/frontend/.pnp.js
-
+web/backend/data/users.db 
+web/backend/tests/
 # testing
 web/frontend//coverage
 
