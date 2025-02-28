@@ -304,13 +304,14 @@
   color: #1e3a8a;
   width: 100%;
   text-align: center;
+  margin-bottom: 10px;
 }
 
 .inscription-container p,
 .connexion-container p {
   font-size: 18px;
   color: #555;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
   text-align: center;
 }
 /* Texte sous le titre en une seule ligne */
