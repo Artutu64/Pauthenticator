@@ -1,12 +1,16 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useNavigate, Navigate } from "react-router-dom";
+
 import Page from "./Page";
+import { useAuthContext } from "./AuthProvider";
 
 const Connexion = () => {
   const [connect, setConnect] = useState(false); // Passe à true pour afficher 2FA
   const [code, setCode] = useState(new Array(8).fill("")); // Tableau des chiffres du code
   const [message, setMessage] = useState(null); // Stocke le message de validation
   const inputsRef = useRef([]); // Références pour les inputs
-
+  const {isLoggedIn}= useAuthContext()
+  const navigate = useNavigate();
   // Gérer la saisie du code 2FA
   const handleChange = (index, event) => {
     const value = event.target.value;
@@ -48,53 +52,60 @@ const Connexion = () => {
   }, [code]);
 
   return (
-    <Page>
-      <div className="connexion-container">
-        {connect ? (
-          // Affichage de la validation 2FA
-          <div className="page2fa-container">
-            <h2>Validation 2FA</h2>
-            <p>Veuillez entrer le code à huit chiffres :</p>
-
-            <div className="code-inputs">
-              {code.map((char, index) => (
-                <input
-                  key={index}
-                  ref={(el) => (inputsRef.current[index] = el)}
-                  type="text"
-                  maxLength="1"
-                  value={char}
-                  onChange={(e) => handleChange(index, e)}
-                  onKeyDown={(e) => handleKeyDown(index, e)}
-                  className="digit-input"
-                />
-              ))}
-            </div>
-
-            {/* Affichage du message de validation */}
-            {message && <p className="message-validation" style={{ color: message.color }}>{message.text}</p>}
-          </div>
-        ) : (
-          // Affichage du formulaire de connexion normal
+    <>
+        {
+          isLoggedIn && <>
+          <Navigate to="/" replace={true}/>
+          </>
+        }
+        <Page>
           <div className="connexion-container">
-            <h2>Connexion</h2>
-            <p>Veuillez entrer vos identifiants pour vous connecter.</p>
+            {connect ? (
+              // Affichage de la validation 2FA
+              <div className="page2fa-container">
+                <h2>Validation 2FA</h2>
+                <p>Veuillez entrer le code à huit chiffres :</p>
 
-            <form className="connexion-form">
-              <label>Email :</label>
-              <input type="email" placeholder="Votre email" required />
+                <div className="code-inputs">
+                  {code.map((char, index) => (
+                    <input
+                      key={index}
+                      ref={(el) => (inputsRef.current[index] = el)}
+                      type="text"
+                      maxLength="1"
+                      value={char}
+                      onChange={(e) => handleChange(index, e)}
+                      onKeyDown={(e) => handleKeyDown(index, e)}
+                      className="digit-input"
+                    />
+                  ))}
+                </div>
 
-              <label>Mot de passe :</label>
-              <input type="password" placeholder="Votre mot de passe" required />
+                {/* Affichage du message de validation */}
+                {message && <p className="message-validation" style={{ color: message.color }}>{message.text}</p>}
+              </div>
+            ) : (
+              // Affichage du formulaire de connexion normal
+              <div className="connexion-container">
+                <h2>Connexion</h2>
+                <p>Veuillez entrer vos identifiants pour vous connecter.</p>
 
-              <button type="button" onClick={() => setConnect(true)}>
-                Se connecter
-              </button>
-            </form>
+                <form className="connexion-form">
+                  <label>Email :</label>
+                  <input type="email" placeholder="Votre email" required />
+
+                  <label>Mot de passe :</label>
+                  <input type="password" placeholder="Votre mot de passe" required />
+
+                  <button type="button" onClick={() => setConnect(true)}>
+                    Se connecter
+                  </button>
+                </form>
+              </div>
+            )}
           </div>
-        )}
-      </div>
-    </Page>
+        </Page>
+    </>
   );
 };
 

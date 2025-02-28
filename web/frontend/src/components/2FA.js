@@ -1,11 +1,16 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useNavigate, Navigate } from "react-router-dom";
+
 import Page from "./Page";
+import { useAuthContext } from "./AuthProvider";
 import { QRCodeCanvas } from "qrcode.react";
 
 const Page2FA = () => {
   const [code, setCode] = useState(new Array(8).fill("")); // Tableau pour stocker le code
   const [message, setMessage] = useState(null); // Message de succès ou d'erreur
   const inputsRef = useRef([]); // Références des inputs
+  const {isLoggedIn}= useAuthContext()
+  const navigate = useNavigate();
 
   // Gérer la saisie du code
   const handleChange = (index, event) => {
@@ -50,37 +55,44 @@ const Page2FA = () => {
   }, [code]);
 
   return (
-    <Page>
-      <div className="page2fa-container">
-        <h2>Authentification à Deux Facteurs</h2>
+    <>
+        {
+          !isLoggedIn && <>
+          <Navigate to="/connexion" replace={true}/>
+          </>
+        }
+        <Page>
+          <div className="page2fa-container">
+            <h2>Authentification à Deux Facteurs</h2>
 
-        {/* QR Code */}
-        <div className="qr-container">
-          <QRCodeCanvas value="otpauth://totp/YourApp?secret=YOUR_SECRET_KEY" size={150} />
-        </div>
+            {/* QR Code */}
+            <div className="qr-container">
+              <QRCodeCanvas value="otpauth://totp/YourApp?secret=YOUR_SECRET_KEY" size={150} />
+            </div>
 
-        <p>Entrez votre code de validation reçu par email :</p>
+            <p>Entrez votre code de validation reçu par email :</p>
 
-        {/* Saisie du code en 8 champs */}
-        <div className="code-inputs">
-          {code.map((char, index) => (
-            <input
-              key={index}
-              ref={(el) => (inputsRef.current[index] = el)}
-              type="text"
-              maxLength="1"
-              value={char}
-              onChange={(e) => handleChange(index, e)}
-              onKeyDown={(e) => handleKeyDown(index, e)}
-              className="digit-input"
-            />
-          ))}
-        </div>
+            {/* Saisie du code en 8 champs */}
+            <div className="code-inputs">
+              {code.map((char, index) => (
+                <input
+                  key={index}
+                  ref={(el) => (inputsRef.current[index] = el)}
+                  type="text"
+                  maxLength="1"
+                  value={char}
+                  onChange={(e) => handleChange(index, e)}
+                  onKeyDown={(e) => handleKeyDown(index, e)}
+                  className="digit-input"
+                />
+              ))}
+            </div>
 
-        {/* Affichage du message de validation */}
-        {message && <p className="message-validation" style={{ color: message.color }}>{message.text}</p>}
-      </div>
-    </Page>
+            {/* Affichage du message de validation */}
+            {message && <p className="message-validation" style={{ color: message.color }}>{message.text}</p>}
+          </div>
+        </Page>
+    </>
   );
 };
 

@@ -2,9 +2,11 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../logo.svg";
 import "../App.css"; // Import du CSS
+import { useAuthContext } from "./AuthProvider";
 
 const Page = ({ children }) => {
-  const navigate = useNavigate(); // Hook pour la navigation
+  const navigate = useNavigate();
+  const { isLoggedIn, logout } = useAuthContext();
 
   // Fonction pour revenir au Dashboard
   const goToDashboard = () => {
@@ -27,19 +29,35 @@ const Page = ({ children }) => {
 
         {/* Navigation centrée */}
         <nav className="App-nav">
-          <Link to="/">
-            <button className="App-button">Dashboard</button>
-          </Link>
-          <Link to="/inscription">
-            <button className="App-button">Inscription</button>
-          </Link>
-          <Link to="/page2FA">
-            <button className="App-button">2FA</button>
-          </Link>
-          <Link to="/connexion">
-            <button className="App-button">Connexion</button> 
-          </Link>
+          {isLoggedIn ? (
+            <>
+              <Link to="/">
+                <button className="App-button">Dashboard</button>
+              </Link>
+              <Link to="/page2FA">
+                <button className="App-button">2FA</button>
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link to="/inscription">
+                <button className="App-button">Inscription</button>
+              </Link>
+              <Link to="/connexion">
+                <button className="App-button">Connexion</button>
+              </Link>
+            </>
+          )}
         </nav>
+
+        {/* Bouton de déconnexion à droite du header */}
+        {isLoggedIn && (
+          <div className="App-header-right">
+            <button onClick={logout} className="logout-button">
+              Se déconnecter
+            </button>
+          </div>
+        )}
       </header>
 
       {/* Contenu de la page */}
