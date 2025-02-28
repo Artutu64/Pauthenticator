@@ -15,6 +15,7 @@ const Dashboard = () => {
   const goTo2FA = () => {
     navigate("/page2FA");
   };
+
   useEffect(() => {
 
     async function fetchData(){
@@ -42,8 +43,16 @@ const Dashboard = () => {
     fetchData()
 
   }, [])
+
+  if(!isLoggedIn){
+    return (
+      <>
+        <Navigate to="/connexion" replace={true}/>
+      </>
+    )
+  }
   
-  if (loading){
+  if(loading){
     return (
       <Page>
         <div>
@@ -55,11 +64,6 @@ const Dashboard = () => {
 
   return (
     <>
-    {
-      !isLoggedIn && <>
-      <Navigate to="/connexion" replace={true}/>
-      </>
-    }
       <Page>
         <div className
       ="dashboard-container">
