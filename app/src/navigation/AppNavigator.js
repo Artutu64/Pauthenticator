@@ -6,8 +6,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import HomeScreen from '../screens/Home_screen';
 import ScannerScreen from '../screens/Scanner_screen';
 
+//
 const Stack = createStackNavigator();
 
+
+
+/////   FONCTION PRINCIPALE   /////
 const AppNavigator = () => {
   return (
     <NavigationContainer>

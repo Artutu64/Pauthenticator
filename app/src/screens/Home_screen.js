@@ -12,24 +12,8 @@ import FloatingButton from '../components/Bouton_scan';
 
 
 
-// FONCTION PRINCIPALE
+/////   FONCTION PRINCIPALE   /////
 const HomeScreen = ({ navigation }) => {
-  
-  useFocusEffect(
-    useCallback(() => {
-      const onBackPress = () => {
-        Alert.alert("Quitter l'application ?", "Voulez-vous vraiment fermer l'application ?", [
-          { text: "Annuler", style: "cancel" },
-          { text: "Oui", onPress: () => BackHandler.exitApp() }
-        ]);
-        return true; 
-      };
-
-      const backHandler = BackHandler.addEventListener("hardwareBackPress", onBackPress);
-
-      return () => backHandler.remove(); 
-    }, [])
-  );
 
   return (
     <View style={style.container}>
