@@ -1,4 +1,4 @@
-// FICHIER STYLE DU BACKGROUND DE L'APP
+// FICHIER STYLE DU BACKGROUND DE LA HOMEPAGE DE L'APP
 
 import { StyleSheet } from 'react-native';
 

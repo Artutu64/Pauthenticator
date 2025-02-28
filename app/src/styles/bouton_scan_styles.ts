@@ -1,4 +1,4 @@
-// FICHIER STYLE DU BOUTON  DE L'APP
+// FICHIER STYLE DU BOUTON SCAN DE L'APP
 
 import { StyleSheet } from 'react-native';
 
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   icon: {
-    width: 40,  // Ajuste la taille selon ton image
+    width: 40,
     height: 40,
   },
 });
