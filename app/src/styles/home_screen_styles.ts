@@ -5,10 +5,14 @@ import { StyleSheet } from 'react-native';
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fdf9ec',
-    justifyContent: 'center',
-    alignItems: 'center',
-  }
+    backgroundColor: '#000000',
+    paddingTop: 95, // Décalage sous le Header pour éviter la superposition
+  },
+  scrollView: {
+    flex: 1,
+  },
+  cardsContainer: {
+  },
 });
 
 export default style;

@@ -1,11 +1,16 @@
 import React from 'react';
 import { TouchableOpacity, View, Image, GestureResponderEvent } from 'react-native';
+
+// INCLUSION DU STYLE
 import styles from '../styles/bouton_scan_styles';
 
 interface FloatingButtonProps {
   onPress: (event: GestureResponderEvent) => void;
 }
 
+
+
+/////   FONCTION PRINCIPALE   /////
 const FloatingButton: React.FC<FloatingButtonProps> = ({ onPress }) => {
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>

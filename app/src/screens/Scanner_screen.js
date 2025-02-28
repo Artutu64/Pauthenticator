@@ -18,18 +18,16 @@ const ScannerScreen = () => {
   useEffect(() => {
     const backAction = () => {
       if (navigation.canGoBack()) {
-        navigation.goBack(); // Retourne uniquement si c'est possible
+        navigation.goBack();
       } else {
-        navigation.navigate('Home'); // Sinon, navigue vers l'accueil
+        navigation.navigate('Home');
       }
-      return true; // Empêche le comportement par défaut (fermeture de l'app)
+      return true;
     };
 
-    // Ajoute un écouteur sur le bouton retour Android
     const backHandler = BackHandler.addEventListener("hardwareBackPress", backAction);
 
     return () => {
-      // Retire l'écouteur quand l'écran est démonté pour éviter les conflits
       backHandler.remove();
     };
   }, [navigation]);
@@ -42,21 +40,11 @@ const ScannerScreen = () => {
     physicalDevices: ["ultra-wide-angle-camera", "wide-angle-camera", "telephoto-camera"],
   });
 
-  // Configuration du scanner de codes QR
   const codeScanner = useCodeScanner({
-    codeTypes: ['qr', 'ean-13', 'aztec', 'data-matrix', 'code-128', 'code-39', 'code-93'], // Types de codes scannables
+    codeTypes: ['qr', 'ean-13', 'aztec', 'data-matrix', 'code-128', 'code-39', 'code-93'],
     onCodeScanned: (codes) => {
-      if (codes.length === 0 || !codes[0].value) {
-        // Alerte si le scan ne contient pas de données valides
-        Alert.alert("Erreur", "Aucune donnée valide scannée");
-      } else {
-        // Affiche une alerte avec le contenu du QR Code et retourne à l'accueil
-        Alert.alert("QR Code Scanné", codes[0].value);
-        if (navigation.canGoBack()) {
-          navigation.goBack(); // Retourne uniquement si c'est possible
-        } else {
-          navigation.navigate('Home'); // Sinon, navigue vers l'accueil
-        }
+      if (codes.length > 0 && codes[0].value) {
+        navigation.navigate('Home', { scannedData: codes[0].value }); // Envoie les données à HomeScreen
       }
     }
   });

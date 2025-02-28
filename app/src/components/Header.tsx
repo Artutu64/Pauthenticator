@@ -1,7 +1,12 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import styles from '../styles/header_styles'; // Import du style externe
 
+// INCLUSION DU STYLE
+import styles from '../styles/header_styles'; 
+
+
+
+/////   FONCTION PRINCIPALE   /////
 const Header = () => {
   return (
     <View style={styles.header}>
