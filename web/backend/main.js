@@ -8,6 +8,7 @@ const dashboardRoute = require("./src/routes/DashboardRoute");
 const TOTPDatabase = require("./src/database/TOTPDatabase");
 const reset2faRoute = require("./src/routes/reset2fa");
 const validate2fa = require("./src/routes/validate2fa");
+const login2faRoute = require("./src/routes/login2faRoute");
 require("dotenv").config();
 
 const app = express();
@@ -33,6 +34,7 @@ app.post("/login", loginRoute)
 app.get("/dashboard", dashboardRoute)
 app.post("/reset2fa", reset2faRoute)
 app.post("/validate2fa", validate2fa)
+app.post("/login2fa", login2faRoute)
 
 app.use(function (req, res) {
     res.status(404).json({ message: "Aucune page exposée sur cet URL !" });
