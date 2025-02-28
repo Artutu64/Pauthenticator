@@ -6,7 +6,7 @@ async function inscriptionRoute(req, res) {
         const { mail, password, nom, prenom } = req.body; // Extraction des données du body
 
         if (!mail || !password || !nom || !prenom) {
-            return res.status(400).json({ error: "Tous les champs sont requis." });
+            return res.status(400).json({ error: "Tous les champs sont requis." + mail + " " + password + " " + nom + " " + prenom});
         }
 
         let db = new UserDatabase()

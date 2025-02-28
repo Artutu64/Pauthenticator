@@ -26,10 +26,7 @@ export function AuthProvider(props){
     const logout = () => {  
         setToken(null);
         setIsLoggedIn(false);
-        const storedToken = localStorage.getItem("token");
-        if (storedToken) {
-            localStorage.removeItem("token");
-        }
+        localStorage.removeItem("token");
         <Navigate to="/connexion" replace={true}/>
     }
 
