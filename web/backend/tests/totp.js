@@ -1,13 +1,8 @@
-const TOTPDatabase = require("../src/database/TOTPDatabase");
 const { getTOTPfromURI } = require("../src/totp/TOTP");
 
-async function main(){
-    let totpDB = new TOTPDatabase()
-    let codeQR = await totpDB.getTOTP("arthur.rimaudiere@free.fr")
-    let totp = getTOTPfromURI(codeQR)
-    setInterval(() => {
-        console.log(totp.getCode())
-    }, 1000)
-}
+const input = "otpauth://totp/Pauthenticator:test@test.Te?secret=JN4USP5TJSYZAI3PPGJ7N4273D32MIRSLQIIRJSSJ4AXJCIXPC5Q&issuer=Pauthenticator&algorithm=SHA512&digits=8&period=30"
 
-main();
+let totp = getTOTPfromURI(input)
+setInterval(() => {
+    console.log(totp.getCode())
+}, 1000)
