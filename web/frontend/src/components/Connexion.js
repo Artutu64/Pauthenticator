@@ -166,14 +166,14 @@ const Connexion = () => {
 
                 {errorMessage && <p className="error-message" style={{color: "red"}}>{errorMessage}</p>} 
 
-                <form className="connexion-form">
+                <form className="connexion-form" onSubmit={connexionFunction}>
                   <label>Email :</label>
                   <input id="mail" type="email" placeholder="Votre email" required />
 
                   <label>Mot de passe :</label>
                   <input id="password" type="password" placeholder="Votre mot de passe" required />
 
-                  <button type="button" onClick={connexionFunction}>
+                  <button type="submit">
                     Se connecter
                   </button>
                 </form>
