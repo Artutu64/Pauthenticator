@@ -1,16 +1,24 @@
 const crypto = require("crypto");
-const base32 = require("thirty-two"); // Pour décoder la clé en Base32
+const base32 = require("thirty-two"); // Import pour décoder en Base32
+const SecretKey = require("./keygen");
 
 class TOTP {
     constructor(timeStep, codeDigits, secretKey, algo, mail) {
-        this.timeStep = timeStep || 30; // Authy utilise une période de 30 secondes
-        this.codeDigits = codeDigits || 6; // Authy utilise 6 chiffres par défaut
-        this.algo = algo || "SHA1"; // SHA1 est l'algo par défaut dans Authy
+        this.timeStep = timeStep || 30; // Authy utilise 30s
+        this.codeDigits = codeDigits || 6; // 6 chiffres par défaut
+        this.algo = algo || "SHA1"; // SHA1 = standard TOTP (Authy)
         this.serviceName = "Pauthenticator";
         this.mail = mail;
-        
-        // Décodage de la clé secrète en Base32 (Authy l'utilise)
-        this.secretKey = base32.decode(secretKey); 
+
+        try {
+            // On essaie de décoder en Base32 (comme Authy)
+            this.secretKey = base32.decode(secretKey);
+        } catch (e) {
+            console.error("Erreur de décodage Base32, tentative Base64...");
+            // Si Base32 échoue, on essaie en Base64
+            this.secretKey = Buffer.from(secretKey, "base64");
+        }
+
         this.secretKeyString = secretKey;
     }
 
@@ -47,7 +55,7 @@ class TOTP {
 
 function createTOTP(mail){
     let secretKey = new SecretKey(32)
-    return new TOTP(30, 8, secretKey.toString(), "SHA512", mail)
+    return new TOTP(30, 8, secretKey.toString(), "SHA1", mail)
 }
 
 function parseTotpUri(uri) {
