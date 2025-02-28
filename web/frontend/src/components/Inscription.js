@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { useNavigate, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import Page from "./Page";
 import { useAuthContext } from "./AuthProvider";
 import getBackendUrl from "../utils/url";
 
 const Inscription = () => {
   const { isLoggedIn,login } = useAuthContext();
-  const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState(""); // Stocke le message d'erreur
 
   // Fonction de validation d'email

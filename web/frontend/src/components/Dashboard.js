@@ -6,7 +6,7 @@ import { useAuthContext } from "./AuthProvider";
 import getBackendUrl from "../utils/url";
 
 const Dashboard = () => {
-  const {isLoggedIn, token,logout}= useAuthContext()
+  const {isLoggedIn, token, logout}= useAuthContext()
   const navigate = useNavigate(); // Hook pour la navigation
   const [loading,setLoading] = useState(true)
   // Simuler les données utilisateur (à récupérer plus tard depuis une API)
