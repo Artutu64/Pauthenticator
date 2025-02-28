@@ -2,7 +2,7 @@
 
 import { StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   button: {
     position: 'absolute',
     bottom: 20,
@@ -28,4 +28,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default styles;
+export default style;

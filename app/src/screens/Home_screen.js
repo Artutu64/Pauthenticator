@@ -4,12 +4,15 @@ import { useFocusEffect } from '@react-navigation/native';
 import { useCallback } from 'react';
 
 // INCLUSION DU STYLE
-import styles from '../styles/home_screen_styles';
+import style from '../styles/home_screen_styles';
 
 // INCLUSION DES COMPONENTS
 import Header from '../components/Header';
 import FloatingButton from '../components/Bouton_scan';
 
+
+
+// FONCTION PRINCIPALE
 const HomeScreen = ({ navigation }) => {
   
   useFocusEffect(
@@ -29,7 +32,7 @@ const HomeScreen = ({ navigation }) => {
   );
 
   return (
-    <View style={styles.container}>
+    <View style={style.container}>
       <Header />
       <FloatingButton onPress={() => navigation.navigate('Scanner')} />
     </View>

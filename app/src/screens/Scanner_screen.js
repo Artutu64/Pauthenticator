@@ -3,9 +3,12 @@ import { View, Text, BackHandler } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Camera, useCameraDevice, useCameraPermission, useCodeScanner } from 'react-native-vision-camera';
 
-//
-import styles from '../styles/home_screen_styles';
+// INCLUSION DU STYLE
+import styles from '../styles/scanner_screen_styles';
 
+
+
+// FONCTION PRINCIPALE
 const ScannerScreen = () => {
   const navigation = useNavigation();
   const { hasPermission, requestPermission } = useCameraPermission();
@@ -34,7 +37,7 @@ const ScannerScreen = () => {
     const backHandler = BackHandler.addEventListener("hardwareBackPress", backAction);
 
     return () => {
-      backHandler.remove(); // ✅ Utilisation correcte de .remove()
+      backHandler.remove();
     };
   }, [navigation]);
 
@@ -45,6 +48,20 @@ const ScannerScreen = () => {
       ) : (
         <Text>Aucun appareil photo disponible</Text>
       )}
+
+      {/* Masque sombre avec trou pour la zone de scan */}
+      <View style={styles.overlay}>
+        <View style={styles.topOverlay} />
+        <View style={styles.bottomOverlay} />
+        <View style={styles.leftOverlay} />
+        <View style={styles.rightOverlay} />
+
+        {/* Zone de scan */}
+        <View style={styles.scanArea} />
+
+        {/* Texte explicatif */}
+        <Text style={styles.instructions}>Pointez votre appareil sur un QRCode 2FA</Text>
+      </View>
     </View>
   );
 };
