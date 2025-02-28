@@ -1,5 +1,4 @@
 web/backend/node_modules/
-web/backend/.env
 web/frontend/node_modules/
 web/frontend/.pnp
 web/frontend/.pnp.js
