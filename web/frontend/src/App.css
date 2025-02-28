@@ -599,3 +599,24 @@
 }
 
 
+/* Bouton de copie */
+.copy-button {
+  background-color: #1e3a8a;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px auto; /* Centre le bouton */
+}
+
+.copy-button:hover {
+  background-color: #14286c;
+  transform: scale(1.05);
+}

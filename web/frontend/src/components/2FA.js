@@ -1,16 +1,20 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
-
+import { Commet } from "react-loading-indicators";
 import Page from "./Page";
 import { useAuthContext } from "./AuthProvider";
 import { QRCodeCanvas } from "qrcode.react";
+import getBackendUrl from "../utils/url";
 
 const Page2FA = () => {
-  const [code, setCode] = useState(new Array(8).fill("")); // Tableau pour stocker le code
-  const [message, setMessage] = useState(null); // Message de succès ou d'erreur
-  const inputsRef = useRef([]); // Références des inputs
-  const {isLoggedIn}= useAuthContext()
+  const [code, setCode] = useState(new Array(8).fill(""));
+  const [message, setMessage] = useState(null);
+  const inputsRef = useRef([]);
+  const { isLoggedIn, token, logout } = useAuthContext();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+  const [qrcodeText, setQrcodeText] = useState("");
+  const [copied, setCopied] = useState(false); // Nouvel état pour l'affichage "Copié !"
 
   // Gérer la saisie du code
   const handleChange = (index, event) => {
@@ -20,14 +24,13 @@ const Page2FA = () => {
       newCode[index] = value;
       setCode(newCode);
 
-      // Déplacer le focus automatiquement
       if (value && index < 7) {
         inputsRef.current[index + 1].focus();
       }
     }
   };
 
-  // Gestion du clavier (Backspace pour revenir en arrière)
+  // Gestion du clavier (Backspace)
   const handleKeyDown = (index, event) => {
     if (event.key === "Backspace" && !code[index] && index > 0) {
       inputsRef.current[index - 1].focus();
@@ -36,62 +39,115 @@ const Page2FA = () => {
 
   // Vérifier automatiquement si tous les inputs sont remplis
   useEffect(() => {
-    if (code.every((char) => char !== "")) {
-      // Une chance sur deux de succès ou d'erreur
-      const success = Math.random() < 0.5;
+    async function validateCode() {
+      if (code.every((char) => char !== "")) {
+        let response = await fetch(getBackendUrl() + "validate2fa", {
+          method: "POST",
+          body: JSON.stringify({ code: code.join("") }),
+          headers: {
+            "Content-Type": "application/json; charset=utf-8",
+            "Authorization": `Bearer ${token}`
+          }
+        });
 
-      if (success) {
-        setMessage({ text: "✅ Succès ! Code valide.", color: "green" });
-      } else {
-        setMessage({ text: "❌ Erreur ! Code incorrect.", color: "red" });
+        if (response.ok) {
+          navigate("/");
+        } else if (response.status === 401) {
+          logout();
+        } else {
+          setMessage({ text: "❌ Erreur ! Code incorrect.", color: "red" });
+        }
+
+        setTimeout(() => {
+          setCode(new Array(8).fill(""));
+          inputsRef.current[0]?.focus();
+        }, 50);
       }
-
-      // Effacer immédiatement les inputs après validation
-      setTimeout(() => {
-        setCode(new Array(8).fill("")); // Réinitialiser les inputs
-        inputsRef.current[0]?.focus(); // Remettre le focus sur le premier champ
-      }, 50);
     }
+
+    validateCode();
   }, [code]);
+
+  useEffect(() => {
+    async function fetchData() {
+      let response = await fetch(getBackendUrl() + "reset2fa", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+          "Authorization": `Bearer ${token}`
+        }
+      });
+
+      if (response.ok) {
+        const json = await response.json();
+        setQrcodeText(json.qr_code);
+        setLoading(false);
+      } else if (response.status === 401) {
+        logout();
+      }
+    }
+
+    fetchData();
+  }, []);
+
+  // Fonction pour copier le texte dans le presse-papier
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(qrcodeText);
+    setCopied(true);
+
+    // Réinitialiser "Copié !" après 2 secondes
+    setTimeout(() => {
+      setCopied(false);
+    }, 2000);
+  };
+
+  if (loading) {
+    return (
+      <Page>
+        <div>
+          <Commet color="#1e3a8a" />
+        </div>
+      </Page>
+    );
+  }
 
   return (
     <>
-        {
-          !isLoggedIn && <>
-          <Navigate to="/connexion" replace={true}/>
-          </>
-        }
-        <Page>
-          <div className="page2fa-container">
-            <h2>Authentification à Deux Facteurs</h2>
+      {!isLoggedIn && <Navigate to="/connexion" replace={true} />}
+      <Page>
+        <div className="page2fa-container">
+          <h2>Authentification à Deux Facteurs</h2>
 
-            {/* QR Code */}
-            <div className="qr-container">
-              <QRCodeCanvas value="otpauth://totp/YourApp?secret=YOUR_SECRET_KEY" size={150} />
-            </div>
-
-            <p>Entrez votre code de validation reçu par email :</p>
-
-            {/* Saisie du code en 8 champs */}
-            <div className="code-inputs">
-              {code.map((char, index) => (
-                <input
-                  key={index}
-                  ref={(el) => (inputsRef.current[index] = el)}
-                  type="text"
-                  maxLength="1"
-                  value={char}
-                  onChange={(e) => handleChange(index, e)}
-                  onKeyDown={(e) => handleKeyDown(index, e)}
-                  className="digit-input"
-                />
-              ))}
-            </div>
-
-            {/* Affichage du message de validation */}
-            {message && <p className="message-validation" style={{ color: message.color }}>{message.text}</p>}
+          {/* QR Code */}
+          <div className="qr-container">
+            <QRCodeCanvas value={qrcodeText} size={250} />
           </div>
-        </Page>
+
+          {/* Bouton pour copier le texte du QR code */}
+          <button className="copy-button" onClick={copyToClipboard}>
+            {copied ? "✔ Copié !" : "📋 Copier le qr code"}
+          </button>
+
+          {/* Saisie du code en 8 champs */}
+          <div className="code-inputs">
+            {code.map((char, index) => (
+              <input
+                key={index}
+                ref={(el) => (inputsRef.current[index] = el)}
+                type="text"
+                maxLength="1"
+                value={char}
+                onChange={(e) => handleChange(index, e)}
+                onKeyDown={(e) => handleKeyDown(index, e)}
+                className="digit-input"
+              />
+            ))}
+          </div>
+
+          {/* Affichage du message de validation */}
+          {message && <p className="message-validation" style={{ color: message.color }}>{message.text}</p>}
+        </div>
+      </Page>
     </>
   );
 };

@@ -8,7 +8,7 @@ const Connexion = () => {
   const [connect, setConnect] = useState(false); // Passe à true pour afficher 2FA
   const [code, setCode] = useState(new Array(8).fill("")); // Tableau des chiffres du code
   const [message, setMessage] = useState(null); // Stocke le message de validation
-  const inputsRef = useRef([]); // Références pour les inputs
+  const inputsRef = useRef([]); 
   const {isLoggedIn, login}= useAuthContext()
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
@@ -16,19 +16,16 @@ const Connexion = () => {
   const [password, setPassword] = useState("")
 
 
-  // Fonction de validation d'email
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
 
-  // Fonction de validation du mot de passe
   const validatePassword = (password) => {
     return true;
   };
 
   
-  // Gérer la saisie du code 2FA
   const handleChange = (index, event) => {
     const value = event.target.value;
     if (/^[0-9]?$/.test(value)) {
@@ -36,21 +33,18 @@ const Connexion = () => {
       newCode[index] = value;
       setCode(newCode);
 
-      // Déplacer le focus automatiquement au champ suivant
       if (value && index < 7) {
         inputsRef.current[index + 1].focus();
       }
     }
   };
 
-  // Gestion du clavier (Backspace pour revenir en arrière)
   const handleKeyDown = (index, event) => {
     if (event.key === "Backspace" && !code[index] && index > 0) {
       inputsRef.current[index - 1].focus();
     }
   };
 
-  // Vérifier si tous les inputs sont remplis
   useEffect(() => {
     if (code.every((char) => char !== "")) {
       const success = Math.random() < 0.5;
@@ -70,23 +64,20 @@ const Connexion = () => {
   }, [code]);
 
   const connexionFunction = async (e) => {
-    e.preventDefault(); // Empêche le rechargement de la page
+    e.preventDefault(); 
     let mail = document.getElementById("mail").value.trim();
     let password = document.getElementById("password").value;
 
-    // Vérification des champs vides
     if ( !mail || !password) {
       setErrorMessage("Tous les champs doivent être remplis.");
       return;
     }
 
-    // Vérification du format de l'email
     if (!validateEmail(mail)) {
       setErrorMessage("Veuillez entrer un email valide.");
       return;
     }
 
-    // Vérification de la complexité du mot de passe
     if (!validatePassword(password)) {
       setErrorMessage("Le mot de passe doit contenir au moins 8 caractères, une majuscule, un chiffre et un caractère spécial.");
       return;
