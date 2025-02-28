@@ -12,7 +12,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 10px 20px;
-  position: relative; /* Permet de centrer la navigation */
+  position: relative;
 }
 
 /* Conteneur du logo et du titre */
@@ -45,7 +45,7 @@
   font-weight: bold;
 }
 
-/* Navigation centrée */
+/* === NAVIGATION CENTRÉE === */
 .App-nav {
   position: absolute;
   left: 50%;
@@ -72,6 +72,35 @@
   background-color: #e0e7ff;
   transform: scale(1.05);
 }
+
+/* === CONTAINER DU BOUTON DÉCONNEXION === */
+.App-header-right {
+  margin-left: auto; /* Permet de pousser le bouton à l'extrême droite */
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 20px; /* Ajoute un espace entre le bouton et le bord */
+}
+
+/* Bouton de déconnexion */
+.logout-button {
+  background-color: #e3342f; /* Rouge */
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.logout-button:hover {
+  background-color: #cc1f1a; /* Rouge plus foncé */
+  transform: scale(1.05);
+}
+
 
 /* ========== CONTENU PRINCIPAL ========== */
 .App-main {
@@ -568,3 +597,5 @@
   font-weight: bold;
   margin-top: 10px;
 }
+
+

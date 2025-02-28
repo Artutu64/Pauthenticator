@@ -1,8 +1,20 @@
 import React from "react";
+import { useNavigate, Navigate } from "react-router-dom";
+
 import Page from "./Page";
+import { useAuthContext } from "./AuthProvider";
 
 const Inscription = () => {
+  const {isLoggedIn}= useAuthContext()
+  const navigate = useNavigate();
+
   return (
+    <>
+    {
+      isLoggedIn && <>
+      <Navigate to="/" replace={true}/>
+      </>
+    }
     <Page>
       <div className="inscription-container">
         <h2>Inscription</h2>
@@ -25,6 +37,7 @@ const Inscription = () => {
         </form>
       </div>
     </Page>
+    </>
   );
 };
 
