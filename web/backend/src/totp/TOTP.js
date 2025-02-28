@@ -1,49 +1,49 @@
 const crypto = require("crypto");
-const SecretKey = require("./keygen");
+const base32 = require("thirty-two"); // Pour décoder la clé en Base32
 
 class TOTP {
     constructor(timeStep, codeDigits, secretKey, algo, mail) {
-        this.timeStep = timeStep;
-        this.codeDigits = codeDigits;
-        this.algo = algo;
-        if(!(this.algo === "SHA1" || this.algo === "SHA512" || this.algo === "SHA256")){
-            this.algo = "SHA512"
-        }
+        this.timeStep = timeStep || 30; // Authy utilise une période de 30 secondes
+        this.codeDigits = codeDigits || 6; // Authy utilise 6 chiffres par défaut
+        this.algo = algo || "SHA1"; // SHA1 est l'algo par défaut dans Authy
         this.serviceName = "Pauthenticator";
         this.mail = mail;
-        this.secretKey = Buffer.from(secretKey, "base64"); // Décoder la clé secrète en Base64
-        this.secretKeyString = secretKey
+        
+        // Décodage de la clé secrète en Base32 (Authy l'utilise)
+        this.secretKey = base32.decode(secretKey); 
+        this.secretKeyString = secretKey;
     }
 
-    toString(){
-        return "otpauth://totp/" + this.serviceName + ":" + this.mail + "?secret=" + this.secretKeyString +"&issuer=" + this.serviceName +"&algorithm=" + this.algo + "&digits=" + this.codeDigits + "&period=" + this.timeStep
+    toString() {
+        return `otpauth://totp/${this.serviceName}:${this.mail}?secret=${this.secretKeyString}&issuer=${this.serviceName}&algorithm=${this.algo}&digits=${this.codeDigits}&period=${this.timeStep}`;
     }
 
     getCode() {
-        const timestamp = Math.floor(Date.now() / 1000); // Timestamp actuel en secondes
-        const counter = Math.floor(timestamp / this.timeStep); // Calcul du compteur de temps
+        const timestamp = Math.floor(Date.now() / 1000);
+        const counter = Math.floor(timestamp / this.timeStep);
 
         const counterBuffer = Buffer.alloc(8);
-        counterBuffer.writeBigInt64BE(BigInt(counter), 0); // Convertir en 8 octets
+        counterBuffer.writeBigInt64BE(BigInt(counter), 0);
 
-        const hash = this.hmac(this.secretKey, counterBuffer); // Appliquer HMAC-SHA512
+        const hash = this.hmac(this.secretKey, counterBuffer);
 
-        const offset = hash[hash.length - 1] & 0x0f; // Récupérer les 4 derniers bits pour l'offset
+        const offset = hash[hash.length - 1] & 0x0f;
 
-        const binary = ((hash[offset] & 0x7f) << 24) | // 1er octet (appliquer masque)
+        const binary = ((hash[offset] & 0x7f) << 24) |
                        ((hash[offset + 1] & 0xff) << 16) |
                        ((hash[offset + 2] & 0xff) << 8) |
                        (hash[offset + 3] & 0xff);
 
-        const otp = binary % Math.pow(10, this.codeDigits); // Code OTP avec le bon nombre de chiffres
-
-        return otp.toString().padStart(this.codeDigits, "0"); // Ajouter des zéros devant si besoin
+        const otp = binary % Math.pow(10, this.codeDigits);
+        return otp.toString().padStart(this.codeDigits, "0");
     }
 
     hmac(key, data) {
         return crypto.createHmac(this.algo, key).update(data).digest();
     }
 }
+
+
 
 function createTOTP(mail){
     let secretKey = new SecretKey(32)

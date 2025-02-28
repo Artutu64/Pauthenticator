@@ -29,6 +29,7 @@ async function login2faRoute(req, res) {
 
         if(code !== goodGood){
             res.status(400).json({error: "Le code n'est pas valide !"})
+            return
         }
 
         let tokenData = {
