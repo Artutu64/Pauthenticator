@@ -46,21 +46,35 @@ const Connexion = () => {
   };
 
   useEffect(() => {
-    if (code.every((char) => char !== "")) {
-      const success = Math.random() < 0.5;
+    async function validateCode() {
+      if (code.every((char) => char !== "")) {
+        let response = await fetch(getBackendUrl() + "login2fa", {
+          method: "POST",
+          body: JSON.stringify({
+            mail : mail,
+            password : password,
+            code: code.join("")
+          }),
+      
+          headers: {
+            "Content-Type": "application/json; charset=utf-8"
+          }
+        });
+        const json = await response.json()
+        if (response.ok){
+          login(json.token)
+        } else {
+          setMessage({ text: "❌ Erreur ! Code incorrect.", color: "red" });
+        }
 
-      if (success) {
-        setMessage({ text: "✅ Succès ! Code valide.", color: "green" });
-      } else {
-        setMessage({ text: "❌ Erreur ! Code incorrect.", color: "red" });
+        setTimeout(() => {
+          setCode(new Array(8).fill(""));
+          inputsRef.current[0]?.focus();
+        }, 50);
       }
-
-      setTimeout(() => {
-        setCode(new Array(8).fill(""));
-        inputsRef.current[0]?.focus();
-      }, 50);
     }
-    
+
+    validateCode();
   }, [code]);
 
   const connexionFunction = async (e) => {
