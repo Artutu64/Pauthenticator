@@ -1,12 +1,13 @@
 const UserDatabase = require("../database/UserDatabase");
 const TokenFactory = require("../token/token");
 const bcrypt = require("bcryptjs");
+const { getTOTPfromURI } = require("../totp/TOTP");
 
-async function loginRoute(req, res) {
+async function login2faRoute(req, res) {
     try {
-        const { mail, password} = req.body; // Extraction des données du body
+        const { mail, password, code} = req.body; // Extraction des données du body
 
-        if (!mail || !password) {
+        if (!mail || !password || !code) {
             return res.status(400).json({ error: "Tous les champs sont requis." });
         }
 
@@ -22,20 +23,23 @@ async function loginRoute(req, res) {
             return res.status(400).json({error: "Utilisateur ou mot de passe incorrect."})
         }
 
-        let need2fa = user.qrcode !== ""
+        let codeQR = user.qrcode
+        let totp = getTOTPfromURI(codeQR)
+        let goodGood = totp.getCode()
+
+        if(code !== goodGood){
+            res.status(400).json({error: "Le code n'est pas valide !"})
+        }
 
         let tokenData = {
             mail: mail,
             timestamp: Date.now() + 30 * 60 * 1000
         };
-        token = ""
-        if(!need2fa){
-            let tokenFactory = new TokenFactory()
-            token = tokenFactory.create(tokenData)
-        }
+
+        let tokenFactory = new TokenFactory()
+        token = tokenFactory.create(tokenData)
 
         res.status(200).json({ 
-            need2fa: need2fa,
             token: token
         });
     } catch (error) {
@@ -44,4 +48,4 @@ async function loginRoute(req, res) {
     }
 }
 
-module.exports = loginRoute
+module.exports = login2faRoute
