@@ -7,20 +7,26 @@ const { height } = Dimensions.get('window');
 const style = StyleSheet.create({
   header: {
     justifyContent: 'center',
-    paddingLeft: 20, 
-    position: 'absolute', 
+    paddingLeft: 0, 
+    position: 'absolute',
+    alignItems: 'center',
+    flexDirection :'row',
     top: 0,
     left: 0,
     right: 0,
     width: '100%',
     height: height / 8, 
-    backgroundColor: '#17b49a',
-
+    backgroundColor: '#1e3a8a',
+  },
+  logo: {
+    width: 80,  
+    height: 80, 
   },
   title: {
     color: '#fdf9ec', 
-    fontSize: 24,
+    fontSize: 30,
     fontWeight: 'bold',
+    fontFamily : "monospace",
   },
 });
 
