@@ -20,7 +20,8 @@ web/frontend/.env.production.local
 web/frontend/npm-debug.log*
 web/frontend/yarn-debug.log*
 web/frontend/yarn-error.log*
-
+web/static/node_modules
+web/static/data
 # =========================================================
 #
 # =========================================================
