@@ -4,19 +4,25 @@ import { StyleSheet, Dimensions } from 'react-native';
 
 const { height } = Dimensions.get('window');
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   header: {
-    width: '100%',
-    height: height / 8, // 1/6 de la hauteur de l'écran
-    backgroundColor: '#17b49a',
     justifyContent: 'center',
-    paddingLeft: 20, // Marge à gauche
+    paddingLeft: 20, 
+    position: 'absolute', 
+    top: 0,
+    left: 0,
+    right: 0,
+    width: '100%',
+    height: height / 8, 
+    backgroundColor: '#17b49a',
+
   },
   title: {
-    color: '#fdf9ec', // Blanc
+    color: '#fdf9ec', 
     fontSize: 24,
     fontWeight: 'bold',
   },
 });
 
-export default styles;
+export default style;
+

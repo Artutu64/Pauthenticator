@@ -1,15 +1,23 @@
 import React from 'react';
-import { View, Text } from 'react-native';
-import styles from '../styles/card_styles';
+import { View, Text, StyleSheet } from 'react-native';
 
+// INCLUSION DU STYLE
+import styles from '../styles/card_styles';
+import generateTOTPFromURL from '../tools/TOTP';
+
+// Définition du type des props du composant Card
 interface CardProps {
-  content: string;
+  data: string; // Définir `data` comme une chaîne de caractères
 }
 
-const Card: React.FC<CardProps> = ({ content }) => {
+/////   FONCTION   /////
+const Card: React.FC<CardProps> = ({ data }) => {
+
+  let totp = generateTOTPFromURL(data)
+
   return (
     <View style={styles.card}>
-      <Text style={styles.cardText}>{content}</Text>
+      <Text style={styles.text}>{totp}</Text>
     </View>
   );
 };
