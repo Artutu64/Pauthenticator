@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.fa591793.css",
+    "main.js": "/static/js/main.8fcc4cf0.js",
+    "static/js/453.8ab44547.chunk.js": "/static/js/453.8ab44547.chunk.js",
+    "static/media/logo_blanc.png": "/static/media/logo_blanc.9d4bea5331aeea22f919.png",
+    "index.html": "/index.html",
+    "main.fa591793.css.map": "/static/css/main.fa591793.css.map",
+    "main.8fcc4cf0.js.map": "/static/js/main.8fcc4cf0.js.map",
+    "453.8ab44547.chunk.js.map": "/static/js/453.8ab44547.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fa591793.css",
+    "static/js/main.8fcc4cf0.js"
+  ]
+}
