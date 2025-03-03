@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../logo.svg";
+import logo from "../logo_blanc.png";
 import "../App.css"; // Import du CSS
 import { useAuthContext } from "./AuthProvider";
 
