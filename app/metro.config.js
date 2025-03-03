@@ -6,6 +6,9 @@ const {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');
  *
  * @type {import('@react-native/metro-config').MetroConfig}
  */
-const config = {};
+const defaultConfig = getDefaultConfig(__dirname);
 
-module.exports = mergeConfig(getDefaultConfig(__dirname), config);
+// Ajoute l'extension `.cjs` pour que Metro prenne en charge crypto
+defaultConfig.resolver.sourceExts = [...defaultConfig.resolver.sourceExts, "cjs"];
+
+module.exports = mergeConfig(defaultConfig, {});
