@@ -64,7 +64,7 @@ const HomeScreen = ({ route, navigation }) => {
   return (
     <View style={styles.container}>
       <Header />
-      <ScrollView>
+      <ScrollView style={styles.cardsContainer}>
         {/* Affichage des QR Codes scannés sous forme de cartes */}
         {scannedData.length > 0 ? (
           scannedData.map((data, index) => (

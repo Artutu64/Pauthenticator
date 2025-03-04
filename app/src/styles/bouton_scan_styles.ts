@@ -7,8 +7,8 @@ const style = StyleSheet.create({
     position: 'absolute',
     bottom: 20,
     right: 20,
-    width: 80,
-    height: 80,
+    width: 60,
+    height: 60,
     borderRadius: 50,
     backgroundColor: '#b41731',
     justifyContent: 'center',
@@ -23,8 +23,8 @@ const style = StyleSheet.create({
     alignItems: 'center',
   },
   icon: {
-    width: 40,
-    height: 40,
+    width: 30,
+    height: 30,
   },
 });
 
