@@ -7,7 +7,7 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#000000',
-    paddingTop: 102, // Décalage sous le Header pour éviter la superposition
+    paddingTop: 102,
   },
   scrollView: {
     flex: 1,
@@ -16,16 +16,16 @@ const style = StyleSheet.create({
     paddingTop : 10,
   },
   emptyMessageContainer: {
-    flex: 1, // Prend toute la hauteur disponible
-    justifyContent: 'center', // Centre verticalement
-    alignItems: 'center', // Centre horizontalement
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
     paddingTop : 250,
   },
   emptyMessageText: {
-    color: '#FFFFFF', // Texte en blanc
-    fontSize: 22, // Taille du texte
-    fontWeight: 'bold', // Texte en gras
-    textAlign: 'center', // Centre le texte s'il y a plusieurs lignes
+    color: '#FFFFFF', 
+    fontSize: 22,
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
 

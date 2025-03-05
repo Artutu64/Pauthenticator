@@ -6,7 +6,7 @@ const style = StyleSheet.create({
     container: {
       marginTop: 10,
       alignItems: 'center',
-      paddingBottom: 20, // Pour éviter que le bouton soit collé au bord
+      paddingBottom: 20,
     },
     button: {
       backgroundColor: '#1e3a8a',
