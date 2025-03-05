@@ -10,6 +10,9 @@ import styles from '../styles/home_screen_styles';
 import Header from '../components/Header';
 import FloatingButton from '../components/Bouton_scan';
 import Card from '../components/Card';
+import BoutonSupp from '../components/Bouton_supp';
+
+
 
 /////   FONCTION PRINCIPALE   /////
 const HomeScreen = ({ route, navigation }) => {
@@ -65,7 +68,6 @@ const HomeScreen = ({ route, navigation }) => {
     <View style={styles.container}>
       <Header />
       <ScrollView style={styles.cardsContainer}>
-        {/* Affichage des QR Codes scannés sous forme de cartes */}
         {scannedData.length > 0 ? (
           scannedData.map((data, index) => (
             <Card key={index} data={data.url} />
@@ -75,6 +77,9 @@ const HomeScreen = ({ route, navigation }) => {
             <Text style={styles.emptyMessageText}>Aucun QR Code enregistré</Text>
           </View>
         )}
+  
+        {/* Bouton de suppression en bas du ScrollView */}
+        <BoutonSupp onClear={() => setScannedData([])} />
       </ScrollView>
       <FloatingButton onPress={() => navigation.navigate('Scanner')} />
     </View>
