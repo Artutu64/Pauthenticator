@@ -14,8 +14,9 @@ interface BoutonSuppProps {
 /////   FONCTION PRINCIPALE   /////
 const BoutonSupp: React.FC<BoutonSuppProps> = ({ onClear }) => {
   
-  // Fonction pour supprimer tous les QR Codes
+  // fonction pour supprimer tous les QR Codes
   const handleClearStorage = async () => {
+
     Alert.alert(
       "Confirmation",
       "Voulez-vous vraiment supprimer tous les QR Codes enregistrés ?",

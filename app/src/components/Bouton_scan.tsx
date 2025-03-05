@@ -12,6 +12,7 @@ interface FloatingButtonProps {
 
 /////   FONCTION PRINCIPALE   /////
 const FloatingButton: React.FC<FloatingButtonProps> = ({ onPress }) => {
+
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
       <View style={styles.iconContainer}>
@@ -19,6 +20,7 @@ const FloatingButton: React.FC<FloatingButtonProps> = ({ onPress }) => {
       </View>
     </TouchableOpacity>
   );
+  
 };
 
 export default FloatingButton;

@@ -1,8 +1,8 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
-const scanAreaSize = width * 0.7; // Taille de la zone de scan (70% de la largeur)
-const overlayHeight = (height - scanAreaSize) / 2; // Ajustement de la hauteur des zones sombres
+const scanAreaSize = width * 0.7; 
+const overlayHeight = (height - scanAreaSize) / 2; 
 
 const styles = StyleSheet.create({
   container: {
@@ -35,7 +35,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
 
-  // Ajustement des zones sombres pour un centrage parfait
   topOverlay: {
     position: 'absolute',
     top: 0,
@@ -70,7 +69,7 @@ const styles = StyleSheet.create({
 
   instructions: {
     position: 'absolute',
-    bottom: overlayHeight * 0.5, // Ajustement pour bien centrer
+    bottom: overlayHeight * 0.5, 
     textAlign: 'center',
     fontSize: 18,
     fontWeight: 'bold',

@@ -1,9 +1,8 @@
 import EncryptedStorage from 'react-native-encrypted-storage';
 
-/**
- * Stocker une session utilisateur
- */
+// fonction pour stocker une session utilisateur
 export async function storeUserSession(data) {
+
     try {
         await EncryptedStorage.setItem("user_session", JSON.stringify(data));
         console.log("✅ Session utilisateur stockée avec succès !");
@@ -12,10 +11,9 @@ export async function storeUserSession(data) {
     }
 }
 
-/**
- * Récupérer une session utilisateur
- */
+// fonction pour récupérer une session utilisateur
 export async function retrieveUserSession() {
+
     try {
         const session = await EncryptedStorage.getItem("user_session");
         if (session !== undefined) {
@@ -30,10 +28,9 @@ export async function retrieveUserSession() {
     }
 }
 
-/**
- * Supprimer une session utilisateur
- */
+// fonction pour supprimer une session utilisateur
 export async function removeUserSession() {
+
     try {
         await EncryptedStorage.removeItem("user_session");
         console.log("🗑️ Session utilisateur supprimée !");
@@ -42,10 +39,9 @@ export async function removeUserSession() {
     }
 }
 
-/**
- * Effacer tout le stockage sécurisé
- */
+// fonction pour effacer tout le stockage sécurisé
 export async function clearStorage() {
+
     try {
         await EncryptedStorage.clear();
         console.log("🧹 Stockage sécurisé vidé !");

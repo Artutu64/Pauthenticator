@@ -8,6 +8,7 @@ import styles from '../styles/header_styles';
 
 /////   FONCTION PRINCIPALE   /////
 const Header = () => {
+  
   return (
     <View style={styles.header}>
       <Image source={require('../../logo_blanc.png')} style={styles.logo} resizeMode="contain" />   
