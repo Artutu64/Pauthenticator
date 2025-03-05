@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text } from 'react-native';
 import { ProgressBar } from 'react-native-paper';
 
 // INCLUSION DU STYLE
@@ -81,14 +81,14 @@ const Card: React.FC<CardProps> = ({ data }) => {
         <>
           <Text style={styles.text}>🌍 Site: {totpData.website}</Text>
           <Text style={styles.text}>👤 Identifiant: {totpData.identifier}</Text>
-          <Text style={{ fontSize: 24, fontWeight: 'bold', textAlign: 'center', marginVertical: 10 }}>
+          <Text style={styles.otpCode}>
             {formatTOTP(totpData.otpCode)}
           </Text>
           
           <ProgressBar 
             progress={remainingTime / totalPeriod}
             color={remainingTime <= 5 ? 'red' : remainingTime <= 10 ? 'orange' : 'green'}
-            style={localStyles.progressBar}
+            style={styles.progressBar}
           />
         </>
       ) : (
@@ -97,14 +97,5 @@ const Card: React.FC<CardProps> = ({ data }) => {
     </View>
   );
 };
-
-// Styles spécifiques pour la ProgressBar
-const localStyles = StyleSheet.create({
-  progressBar: {
-    height: 8,
-    borderRadius: 4,
-    marginVertical: 10,
-  }
-});
 
 export default Card;

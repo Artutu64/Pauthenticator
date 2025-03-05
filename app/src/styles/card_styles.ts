@@ -2,7 +2,7 @@
 
 import { StyleSheet } from 'react-native';
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
     card: {
       backgroundColor: 'white',
       padding: 10,
@@ -19,6 +19,17 @@ const style = StyleSheet.create({
       fontSize: 18,
       color: 'black',
     },
-  });
+    otpCode: {
+      fontSize: 24,
+      fontWeight: 'bold',
+      textAlign: 'center',
+      marginVertical: 10,
+    },
+    progressBar: {
+      height: 8,
+      borderRadius: 4,
+      marginVertical: 10,
+    },
+});
 
-export default style;
+export default styles;
