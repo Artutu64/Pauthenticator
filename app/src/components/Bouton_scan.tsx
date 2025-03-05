@@ -15,7 +15,7 @@ const FloatingButton: React.FC<FloatingButtonProps> = ({ onPress }) => {
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
       <View style={styles.iconContainer}>
-        <Image source={require('../assets/images/plus.png')} style={styles.icon} />
+        <Image source={require('../assets/images/plus_blanc.png')} style={styles.icon} />
       </View>
     </TouchableOpacity>
   );
