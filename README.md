@@ -20,4 +20,5 @@ Suivre les étapes suivantes:
 2. Créer avec sqlite deux fichiers users.db et totp.db (a défaut, copier les db depuis le dossier web/backend/data)
 3. Avoir node js installé
 4. Faire npm i
-5. Démarrer le site avec npm start```
+5. Démarrer le site avec npm start
+```
