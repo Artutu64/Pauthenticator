@@ -4,15 +4,15 @@ import { StyleSheet } from 'react-native';
 
 const style = StyleSheet.create({
     container: {
-      marginTop: 20,
+      marginTop: 10,
       alignItems: 'center',
       paddingBottom: 20, // Pour éviter que le bouton soit collé au bord
     },
     button: {
-      backgroundColor: '#FF3B30',
+      backgroundColor: '#1e3a8a',
       paddingVertical: 12,
-      paddingHorizontal: 20,
-      borderRadius: 8,
+      paddingHorizontal: 90,
+      borderRadius: 15,
     },
     buttonText: {
       color: '#FFFFFF',
