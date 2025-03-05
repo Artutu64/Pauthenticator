@@ -15,6 +15,18 @@ const style = StyleSheet.create({
   cardsContainer: {
     paddingTop : 10,
   },
+  emptyMessageContainer: {
+    flex: 1, // Prend toute la hauteur disponible
+    justifyContent: 'center', // Centre verticalement
+    alignItems: 'center', // Centre horizontalement
+    paddingTop : 250,
+  },
+  emptyMessageText: {
+    color: '#FFFFFF', // Texte en blanc
+    fontSize: 22, // Taille du texte
+    fontWeight: 'bold', // Texte en gras
+    textAlign: 'center', // Centre le texte s'il y a plusieurs lignes
+  },
 });
 
 export default style;

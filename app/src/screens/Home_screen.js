@@ -10,6 +10,10 @@ import styles from '../styles/home_screen_styles';
 import Header from '../components/Header';
 import FloatingButton from '../components/Bouton_scan';
 import Card from '../components/Card';
+import BoutonSupp from '../components/Bouton_supp';
+
+
+
 
 /////   FONCTION PRINCIPALE   /////
 const HomeScreen = ({ route, navigation }) => {
@@ -65,17 +69,25 @@ const HomeScreen = ({ route, navigation }) => {
     <View style={styles.container}>
       <Header />
       <ScrollView style={styles.cardsContainer}>
-        {/* Affichage des QR Codes scannés sous forme de cartes */}
-        {scannedData.length > 0 ? (
-          scannedData.map((data, index) => (
-            <Card key={index} data={data.url} />
-          ))
-        ) : (
-          <View style={styles.emptyMessageContainer}>
-            <Text style={styles.emptyMessageText}>Aucun QR Code enregistré</Text>
-          </View>
-        )}
-      </ScrollView>
+          {scannedData.length > 0 ? (
+            <View>
+              {scannedData.map((data, index) => (
+                <Card key={index} data={data.url} />
+              ))}
+              <BoutonSupp 
+                onClear={async () => {
+                  await EncryptedStorage.removeItem("stored_urls"); 
+                  setScannedData([]);
+                }} 
+              />
+            </View>
+          ) : (
+            <View style={styles.emptyMessageContainer}>
+              <Text style={styles.emptyMessageText}>Aucun QR Code enregistré</Text>
+            </View>
+          )}
+        </ScrollView>
+
       <FloatingButton onPress={() => navigation.navigate('Scanner')} />
     </View>
   );
